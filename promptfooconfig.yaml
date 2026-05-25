@@ -1,0 +1,46 @@
+prompts:
+  - "You are an AI ghostwriter. Tone: {{tone}}. Create a clear, polished first draft from this outline:\n\n{{outline}}"
+
+providers:
+  - id: openai:gpt-4o-mini
+    config:
+      temperature: 0.7
+  - id: groq:llama-3.3-70b-versatile
+    config:
+      temperature: 0.7
+
+tests:
+  - vars:
+      tone: "Professional"
+      outline: |
+        - Introduction to Cloud Computing
+        - Benefits: Scalability, Cost-efficiency
+        - Conclusion: Future of Cloud
+    assert:
+      - type: contains
+        value: "scalability"
+      - type: llm-rubric
+        value: "The output should sound professional and corporate."
+
+  - vars:
+      tone: "Casual & Witty"
+      outline: |
+        - Why dogs are better than cats
+        - Evidence 1: Loyalty
+        - Evidence 2: Fetch
+        - Conclusion: Dogs win
+    assert:
+      - type: contains-any
+        value: ["dog", "puppy"]
+      - type: llm-rubric
+        value: "The tone should be humorous and lighthearted."
+
+  - vars:
+      tone: "Aggressive & Bold"
+      outline: |
+        - Stop wasting time on social media
+        - Take action now
+        - Build your future
+    assert:
+      - type: llm-rubric
+        value: "The output should be direct, punchy, and highly motivational."

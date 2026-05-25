@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI Ghostwriter - Turn your rough outlines into polished first drafts instantly using OpenAI and Google Gemini." />
+    <meta name="keywords" content="AI writing, ghostwriter, copywriting tool, content generation" />
+    <title>AI Ghostwriter | Professional Draft Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <main class="phone-card" aria-label="AI Ghostwriter Interface">
+        <header class="topbar">
+          <div class="brand">
+            <div class="brand-mark">AI</div>
+            <span>Ghostwriter</span>
+          </div>
+          <div class="top-actions">
+            <button class="icon-button" id="themeToggle" title="Toggle Theme" aria-label="Toggle dark and light mode">
+              <span aria-hidden="true">🌓</span>
+            </button>
+            <button class="icon-button" id="settingsToggle" title="Settings" aria-label="Open settings">
+              <span aria-hidden="true">⚙️</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="view-stack">
+          <!-- WRITE PANEL -->
+          <section class="panel is-active" id="writePanel">
+            <div class="section-heading">
+              <h1>Ghostwriter</h1>
+              <p>Paste your outline or rough notes. We'll handle the first draft.</p>
+            </div>
+
+            <form id="draftForm" class="draft-form">
+              <div class="input-group">
+                <label for="promptInput">Outline or Prompt</label>
+                <textarea
+                  id="promptInput"
+                  name="prompt"
+                  placeholder="e.g. Write a 500-word blog post about the benefits of remote work for small businesses..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="input-group">
+                <label for="toneSelect">Writing Tone</label>
+                <select id="toneSelect" name="tone">
+                  <option value="Professional">Professional & Authoritative</option>
+                  <option value="Friendly">Friendly & Approachable</option>
+                  <option value="Persuasive">Persuasive & Compelling</option>
+                  <option value="Concise">Concise & Direct</option>
+                </select>
+              </div>
+
+              <button class="primary-button" type="submit">Generate First Draft</button>
+            </form>
+          </section>
+
+          <!-- LOADING PANEL -->
+          <section class="panel loading-panel" id="loadingPanel" aria-live="assertive">
+            <div class="spinner"></div>
+            <p>Crafting your masterpiece...</p>
+          </section>
+
+          <!-- PREVIEW PANEL -->
+          <section class="panel preview-panel" id="previewPanel">
+            <button class="back-button" id="backFromPreview" aria-label="Go back to editor">
+              <span aria-hidden="true">←</span> Back to Editor
+            </button>
+            <div class="section-heading">
+              <h1>Draft Preview</h1>
+              <p>Review and export your generated content.</p>
+            </div>
+
+            <div class="draft-preview" id="draftPreview" tabindex="0"></div>
+
+            <div class="button-row">
+              <button class="primary-button" id="downloadTxt" type="button">Download .TXT</button>
+              <div class="button-row" style="margin-top:0; width:100%">
+                <button class="secondary-button" id="downloadDoc" type="button">DOC</button>
+                <button class="secondary-button" id="regenerateDraft" type="button">Regenerate</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- SETTINGS PANEL -->
+          <section class="panel settings-panel" id="settingsPanel">
+            <button class="back-button" id="backFromSettings" aria-label="Go back to editor">
+              <span aria-hidden="true">←</span> Back
+            </button>
+            <div class="section-heading">
+              <h1>AI Settings</h1>
+              <p>Configure your AI providers and API keys.</p>
+            </div>
+
+            <form id="settingsForm" class="settings-form">
+              <div class="input-group">
+                <label for="providerSelect">AI Provider</label>
+                <select id="providerSelect" name="provider">
+                  <option value="openai">OpenAI (GPT-4o, 3.5)</option>
+                  <option value="gemini">Google Gemini (Flash, Pro)</option>
+                  <option value="xai">xAI (Grok)</option>
+                  <option value="groq">Groq (Llama, Mixtral)</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="apiKeyInput">API Key</label>
+                <input
+                  id="apiKeyInput"
+                  name="apiKey"
+                  type="password"
+                  placeholder="Paste your key here..."
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="modelSelect">Model</label>
+                <select id="modelSelect" name="model"></select>
+              </div>
+
+              <div class="toggle-row">
+                <label for="useMockToggle">Use Demo Mode</label>
+                <input id="useMockToggle" name="useMock" type="checkbox" />
+              </div>
+
+              <button class="primary-button" type="submit">Save Configuration</button>
+            </form>
+          </section>
+        </div>
+
+        <div class="status-message" id="statusMessage" role="status"></div>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

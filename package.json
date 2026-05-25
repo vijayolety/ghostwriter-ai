@@ -1,0 +1,18 @@
+{
+    "name": "ai-ghostwriter",
+    "version": "1.0.0",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node --watch server.js",
+        "test": "node test.js",
+        "eval": "promptfoo eval --env-file .env",
+        "view": "promptfoo view"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "cors": "^2.8.5",
+        "openai": "^4.0.0"
+    }
+}
